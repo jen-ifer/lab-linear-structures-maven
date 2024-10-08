@@ -54,12 +54,14 @@ public class ArrayBasedQueue<T> implements Queue<T> {
 
   @Override
   public boolean isEmpty() {
-    return this.size <= 0;
+    //return this.size <= 0;
+    return false;
   } // isEmpty()
 
   @Override
   public boolean isFull() {
-    return this.back() >= this.values.length;
+    //return this.back() >= this.values.length;
+    return false;
   } // isFull()
 
   @Override
@@ -67,7 +69,7 @@ public class ArrayBasedQueue<T> implements Queue<T> {
     if (this.isFull()) {
       throw new Exception("no more room!");
     } // this.isFull()
-    this.values[this.back()] = val;
+    this.values[this.back() % this.values.length] = val;
     ++this.size;
   } // put(T)
 
@@ -77,8 +79,8 @@ public class ArrayBasedQueue<T> implements Queue<T> {
       throw new Exception("empty");
     } // if empty
     // Grab and clear the element at the front of the queue
-    T result = this.values[this.front];
-    this.values[this.front] = null;
+    T result = this.values[this.front % this.values.length];
+    this.values[this.front % this.values.length] = null;
     this.front++;
     // We're removing an element, so decrement the size
     //--this.size;
@@ -91,7 +93,7 @@ public class ArrayBasedQueue<T> implements Queue<T> {
     if (this.isEmpty()) {
       throw new Exception("empty");
     } // if empty
-    return this.values[this.front];
+    return this.values[this.front % this.values.length];
   } // peek()
 
   @Override
