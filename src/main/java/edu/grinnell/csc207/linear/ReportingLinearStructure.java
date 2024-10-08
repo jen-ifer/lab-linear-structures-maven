@@ -2,6 +2,7 @@ package edu.grinnell.csc207.linear;
 
 import java.io.PrintWriter;
 import java.util.Iterator;
+import org.w3c.dom.css.Counter;
 
 /**
  * LinearStructures that report on the operations they perform.
@@ -55,8 +56,10 @@ public class ReportingLinearStructure<T> implements LinearStructure<T> {
    * comments to stdout using no prefix.
    */
   public ReportingLinearStructure(LinearStructure<T> ls) {
-    this(ls, new PrintWriter(System.out, true), "");
+    this(ls, new PrintWriter(System.err, true),ls.getClass().getName() + "@" + Integer.toHexString(System.identityHashCode(ls)));
+
   } // ReportingLinearStructure(LinearStructure<T>)
+  
 
   // +-------------------------+-----------------------------------------
   // | LinearStructure Methods |
